@@ -1,0 +1,12 @@
+# Enable rewrite engine
+RewriteEngine On
+RewriteBase /
+
+# Deny access to sensitive files and directories
+RedirectMatch 403 ^/(?:config|src|vendor)/.*$
+RedirectMatch 403 ^/composer\.(json|lock)$
+RedirectMatch 403 ^/\..*$
+
+# Redirect everything to public directory
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L,NC]
